@@ -1,14 +1,7 @@
-Subject: Fix compilation with different ucontext_t on musl
-Upstream: No
-Author: Simon Frankenberger <simon-alpine@fraho.eu>
-
-The machine state registers have to be accessed differently when
-running on musl libc. This patch fix this by replacing
-"uc_mcontext.regs->grp" with "uc_mcontext.gp_regs"
-and accessing the named fields (like "->nip") by the array index constants.
-
---- openjdk/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp
-+++ openjdk/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp
+diff --git a/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp b/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp
+index f661847b66..c16af4c468 100644
+--- a/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp
++++ b/hotspot/src/cpu/ppc/vm/macroAssembler_ppc.cpp
 @@ -1243,7 +1243,11 @@ bool MacroAssembler::is_load_from_polling_page(int instruction, void* ucontext,
    // the safepoing polling page.
    ucontext_t* uc = (ucontext_t*) ucontext;
@@ -67,8 +60,10 @@ and accessing the named fields (like "->nip") by the array index constants.
      return ra != 1 || rb_val >= 0 ? NULL         // not a stack bang
                                    : sp + rb_val; // banged address
    }
---- openjdk/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp
-+++ openjdk/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp
+diff --git a/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp b/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp
+index ffee3b5089..28605714ef 100644
+--- a/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp
++++ b/hotspot/src/os_cpu/linux_ppc/vm/os_linux_ppc.cpp
 @@ -75,6 +75,10 @@
  # include <poll.h>
  # include <ucontext.h>
@@ -100,7 +95,7 @@ and accessing the named fields (like "->nip") by the array index constants.
  }
  
  intptr_t* os::Linux::ucontext_get_fp(ucontext_t * uc) {
-@@ -213,7 +225,11 @@ JVM_handle_linux_signal(int sig,
+@@ -217,7 +229,11 @@ JVM_handle_linux_signal(int sig,
    if ((sig == SIGSEGV || sig == SIGBUS) && uc) {
      address const pc = os::Linux::ucontext_get_pc(uc);
      if (pc && StubRoutines::is_safefetch_fault(pc)) {
@@ -112,7 +107,7 @@ and accessing the named fields (like "->nip") by the array index constants.
        return true;
      }
    }
-@@ -364,7 +380,11 @@ JVM_handle_linux_signal(int sig,
+@@ -368,7 +384,11 @@ JVM_handle_linux_signal(int sig,
            // continue at the next instruction after the faulting read. Returning
            // garbage from this read is ok.
            thread->set_pending_unsafe_access_error();
@@ -124,7 +119,7 @@ and accessing the named fields (like "->nip") by the array index constants.
            return true;
          }
        }
-@@ -383,7 +403,11 @@ JVM_handle_linux_signal(int sig,
+@@ -387,7 +407,11 @@ JVM_handle_linux_signal(int sig,
          // continue at the next instruction after the faulting read. Returning
          // garbage from this read is ok.
          thread->set_pending_unsafe_access_error();
@@ -136,7 +131,7 @@ and accessing the named fields (like "->nip") by the array index constants.
          return true;
        }
      }
-@@ -406,7 +430,11 @@ JVM_handle_linux_signal(int sig,
+@@ -410,7 +434,11 @@ JVM_handle_linux_signal(int sig,
    if (stub != NULL) {
      // Save all thread context in case we need to restore it.
      if (thread != NULL) thread->set_saved_exception_pc(pc);
@@ -148,7 +143,7 @@ and accessing the named fields (like "->nip") by the array index constants.
      return true;
    }
  
-@@ -564,6 +592,7 @@ void os::print_context(outputStream *st, void *context) {
+@@ -568,6 +596,7 @@ void os::print_context(outputStream *st, void *context) {
    ucontext_t* uc = (ucontext_t*)context;
  
    st->print_cr("Registers:");
@@ -156,7 +151,7 @@ and accessing the named fields (like "->nip") by the array index constants.
    st->print("pc =" INTPTR_FORMAT "  ", uc->uc_mcontext.regs->nip);
    st->print("lr =" INTPTR_FORMAT "  ", uc->uc_mcontext.regs->link);
    st->print("ctr=" INTPTR_FORMAT "  ", uc->uc_mcontext.regs->ctr);
-@@ -572,6 +601,16 @@ void os::print_context(outputStream *st, void *context) {
+@@ -576,6 +605,16 @@ void os::print_context(outputStream *st, void *context) {
      st->print("r%-2d=" INTPTR_FORMAT "  ", i, uc->uc_mcontext.regs->gpr[i]);
      if (i % 3 == 2) st->cr();
    }
@@ -173,7 +168,7 @@ and accessing the named fields (like "->nip") by the array index constants.
    st->cr();
    st->cr();
  
-@@ -600,7 +639,11 @@ void os::print_register_info(outputStream *st, void *context) {
+@@ -604,7 +643,11 @@ void os::print_register_info(outputStream *st, void *context) {
    // this is only for the "general purpose" registers
    for (int i = 0; i < 32; i++) {
      st->print("r%-2d=", i);
@@ -185,8 +180,10 @@ and accessing the named fields (like "->nip") by the array index constants.
    }
    st->cr();
  }
---- openjdk/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp
-+++ openjdk/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp
+diff --git a/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp b/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp
+index 802677f470..14787673fc 100644
+--- a/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp
++++ b/hotspot/src/os_cpu/linux_ppc/vm/thread_linux_ppc.cpp
 @@ -27,6 +27,10 @@
  #include "runtime/frame.inline.hpp"
  #include "runtime/thread.hpp"

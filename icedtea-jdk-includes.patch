@@ -1,6 +1,8 @@
---- openjdk.orig/jdk/src/aix/native/java/net/aix_close.c
-+++ openjdk/jdk/src/aix/native/java/net/aix_close.c
-@@ -62,7 +62,7 @@
+diff --git a/jdk/src/aix/native/java/net/aix_close.c b/jdk/src/aix/native/java/net/aix_close.c
+index 5bf798aba1..6e15be7f8c 100644
+--- a/jdk/src/aix/native/java/net/aix_close.c
++++ b/jdk/src/aix/native/java/net/aix_close.c
+@@ -54,7 +54,7 @@
  #include <unistd.h>
  #include <errno.h>
  
@@ -9,9 +11,10 @@
  #include "jvm.h"
  
  /*
-  * Stack allocated by thread when doing blocking operation
---- openjdk.orig/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c
-+++ openjdk/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c
+diff --git a/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c b/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c
+index c0d5857962..c4abb7ae5d 100644
+--- a/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c
++++ b/jdk/src/aix/native/sun/nio/ch/AixNativeThread.c
 @@ -32,7 +32,7 @@
  #include "sun_nio_ch_NativeThread.h"
  
@@ -21,8 +24,10 @@
  
  /* Also defined in src/aix/native/java/net/aix_close.c */
  #define INTERRUPT_SIGNAL (SIGRTMAX - 1)
---- openjdk.orig/jdk/src/aix/native/sun/nio/ch/AixPollPort.c
-+++ openjdk/jdk/src/aix/native/sun/nio/ch/AixPollPort.c
+diff --git a/jdk/src/aix/native/sun/nio/ch/AixPollPort.c b/jdk/src/aix/native/sun/nio/ch/AixPollPort.c
+index 70064b890e..c10c602b6b 100644
+--- a/jdk/src/aix/native/sun/nio/ch/AixPollPort.c
++++ b/jdk/src/aix/native/sun/nio/ch/AixPollPort.c
 @@ -34,7 +34,7 @@
  #include <unistd.h>
  #include <sys/types.h>
@@ -32,8 +37,10 @@
  #include <sys/pollset.h>
  #include <fcntl.h>
  #include <stddef.h>
---- openjdk.orig/jdk/src/macosx/javavm/export/jvm_md.h
-+++ openjdk/jdk/src/macosx/javavm/export/jvm_md.h
+diff --git a/jdk/src/macosx/javavm/export/jvm_md.h b/jdk/src/macosx/javavm/export/jvm_md.h
+index 012bb1babe..0b57576833 100644
+--- a/jdk/src/macosx/javavm/export/jvm_md.h
++++ b/jdk/src/macosx/javavm/export/jvm_md.h
 @@ -60,7 +60,7 @@
  #include <sys/stat.h>
  #include <fcntl.h>
@@ -43,8 +50,10 @@
  
  /* O Flags */
  
---- openjdk.orig/jdk/src/solaris/javavm/export/jvm_md.h
-+++ openjdk/jdk/src/solaris/javavm/export/jvm_md.h
+diff --git a/jdk/src/solaris/javavm/export/jvm_md.h b/jdk/src/solaris/javavm/export/jvm_md.h
+index 5c681914bb..62415ee255 100644
+--- a/jdk/src/solaris/javavm/export/jvm_md.h
++++ b/jdk/src/solaris/javavm/export/jvm_md.h
 @@ -65,7 +65,7 @@
  #include <sys/stat.h>
  #include <fcntl.h>
@@ -54,8 +63,23 @@
  
  /* O Flags */
  
---- openjdk.orig/jdk/src/solaris/native/java/net/bsd_close.c
-+++ openjdk/jdk/src/solaris/native/java/net/bsd_close.c
+diff --git a/jdk/src/solaris/native/java/net/bsd_close.c b/jdk/src/solaris/native/java/net/bsd_close.c
+index a6050e1f9a..d91e5ffa75 100644
+--- a/jdk/src/solaris/native/java/net/bsd_close.c
++++ b/jdk/src/solaris/native/java/net/bsd_close.c
+@@ -38,7 +38,7 @@
+ #include <sys/uio.h>
+ #include <unistd.h>
+ #include <errno.h>
+-#include <sys/poll.h>
++#include <poll.h>
+ #include "jvm.h"
+ 
+ /*
+diff --git a/jdk/src/solaris/native/java/net/linux_close.c b/jdk/src/solaris/native/java/net/linux_close.c
+index c7a148c746..763c13ffc1 100644
+--- a/jdk/src/solaris/native/java/net/linux_close.c
++++ b/jdk/src/solaris/native/java/net/linux_close.c
 @@ -36,7 +36,7 @@
  #include <sys/uio.h>
  #include <unistd.h>
@@ -65,32 +89,23 @@
  #include "jvm.h"
  
  /*
-  * Stack allocated by thread when doing blocking operation
---- openjdk.orig/jdk/src/solaris/native/java/net/linux_close.c
-+++ openjdk/jdk/src/solaris/native/java/net/linux_close.c
-@@ -34,7 +34,7 @@
- #include <sys/uio.h>
+diff --git a/jdk/src/solaris/native/java/net/net_util_md.h b/jdk/src/solaris/native/java/net/net_util_md.h
+index a48446de9c..8915b68aae 100644
+--- a/jdk/src/solaris/native/java/net/net_util_md.h
++++ b/jdk/src/solaris/native/java/net/net_util_md.h
+@@ -33,7 +33,7 @@
  #include <unistd.h>
- #include <errno.h>
+ 
+ #ifndef USE_SELECT
 -#include <sys/poll.h>
 +#include <poll.h>
- #include "jvm.h"
+ #endif
  
- /*
-  * Stack allocated by thread when doing blocking operation
---- openjdk.orig/jdk/src/solaris/native/java/net/net_util_md.h
-+++ openjdk/jdk/src/solaris/native/java/net/net_util_md.h
-@@ -27,7 +27,7 @@
- #define NET_UTILS_MD_H
  
- #include <netdb.h>
--#include <sys/poll.h>
-+#include <poll.h>
- #include <sys/socket.h>
- 
- int NET_Timeout(int s, long timeout);
---- openjdk.orig/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c
-+++ openjdk/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c
+diff --git a/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c b/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c
+index 6860a167bb..20849dabcf 100644
+--- a/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c
++++ b/jdk/src/solaris/native/sun/nio/ch/DevPollArrayWrapper.c
 @@ -28,7 +28,7 @@
  #include "jvm.h"
  #include "jlong.h"
@@ -100,8 +115,10 @@
  #include <unistd.h>
  #include <sys/time.h>
  
---- openjdk.orig/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
-+++ openjdk/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
+diff --git a/jdk/src/solaris/native/sun/nio/ch/NativeThread.c b/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
+index 5e2a78b7af..204f0441a9 100644
+--- a/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
++++ b/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
 @@ -34,7 +34,7 @@
  
  #ifdef __linux__
@@ -109,10 +126,12 @@
 -  #include <sys/signal.h>
 +  #include <signal.h>
    /* Also defined in net/linux_close.c */
-   #define INTERRUPT_SIGNAL (SIGRTMAX - 2)
+   #define INTERRUPT_SIGNAL (__SIGRTMAX - 2)
  #elif __solaris__
---- openjdk.orig/jdk/src/solaris/native/sun/nio/ch/Net.c
-+++ openjdk/jdk/src/solaris/native/sun/nio/ch/Net.c
+diff --git a/jdk/src/solaris/native/sun/nio/ch/Net.c b/jdk/src/solaris/native/sun/nio/ch/Net.c
+index fcb6197c1d..b497facded 100644
+--- a/jdk/src/solaris/native/sun/nio/ch/Net.c
++++ b/jdk/src/solaris/native/sun/nio/ch/Net.c
 @@ -23,7 +23,7 @@
   * questions.
   */
@@ -122,8 +141,10 @@
  #include <sys/types.h>
  #include <sys/socket.h>
  #include <string.h>
---- openjdk.orig/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c
-+++ openjdk/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c
+diff --git a/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c b/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c
+index 375aaa4850..7606e9ba82 100644
+--- a/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c
++++ b/jdk/src/solaris/native/sun/nio/fs/LinuxWatchService.c
 @@ -32,7 +32,7 @@
  #include <dlfcn.h>
  #include <sys/types.h>
@@ -133,8 +154,10 @@
  #include <sys/inotify.h>
  
  #include "sun_nio_fs_LinuxWatchService.h"
---- openjdk.orig/jdk/src/solaris/transport/socket/socket_md.c
-+++ openjdk/jdk/src/solaris/transport/socket/socket_md.c
+diff --git a/jdk/src/solaris/transport/socket/socket_md.c b/jdk/src/solaris/transport/socket/socket_md.c
+index 33e062e087..819fcabdb8 100644
+--- a/jdk/src/solaris/transport/socket/socket_md.c
++++ b/jdk/src/solaris/transport/socket/socket_md.c
 @@ -37,7 +37,7 @@
  #include <thread.h>
  #else

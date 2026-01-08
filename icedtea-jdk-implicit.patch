@@ -1,9 +1,7 @@
-musl doesn't have isnanf, and this fixes an implicit-function-decl
-how did this even compile without failing at link time?
-rest for implicit
---
---- openjdk/jdk/src/solaris/native/common/jdk_util_md.h
-+++ openjdk/jdk/src/solaris/native/common/jdk_util_md.h
+diff --git a/jdk/src/solaris/native/common/jdk_util_md.h b/jdk/src/solaris/native/common/jdk_util_md.h
+index c13bb7794e..a42ca77741 100644
+--- a/jdk/src/solaris/native/common/jdk_util_md.h
++++ b/jdk/src/solaris/native/common/jdk_util_md.h
 @@ -37,7 +37,7 @@
  #define ISNAND(d) isnan(d)
  #elif defined(__linux__) || defined(_ALLBSD_SOURCE)

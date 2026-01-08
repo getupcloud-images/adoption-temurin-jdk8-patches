@@ -1,6 +1,8 @@
---- openjdk.orig/jdk/src/solaris/native/java/lang/UNIXProcess_md.c
-+++ openjdk/jdk/src/solaris/native/java/lang/UNIXProcess_md.c
-@@ -552,7 +552,11 @@
+diff --git a/jdk/src/solaris/native/java/lang/UNIXProcess_md.c b/jdk/src/solaris/native/java/lang/UNIXProcess_md.c
+index 9b510ad3a9..7922b28c71 100644
+--- a/jdk/src/solaris/native/java/lang/UNIXProcess_md.c
++++ b/jdk/src/solaris/native/java/lang/UNIXProcess_md.c
+@@ -550,7 +550,11 @@ static pid_t
  startChild(JNIEnv *env, jobject process, ChildStuff *c, const char *helperpath) {
      switch (c->mode) {
        case MODE_VFORK:
@@ -12,7 +14,7 @@
        case MODE_FORK:
          return forkChild(c);
  #if defined(__solaris__) || defined(_ALLBSD_SOURCE) || defined(_AIX)
-@@ -651,8 +655,12 @@
+@@ -649,8 +653,12 @@ Java_java_lang_UNIXProcess_forkAndExec(JNIEnv *env,
      if (resultPid < 0) {
          switch (c->mode) {
            case MODE_VFORK:

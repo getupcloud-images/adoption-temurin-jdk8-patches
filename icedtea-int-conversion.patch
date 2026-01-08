@@ -1,6 +1,8 @@
---- openjdk/jdk/src/share/bin/splashscreen_stubs.c
-+++ openjdk/jdk/src/share/bin/splashscreen_stubs.c
-@@ -61,11 +61,11 @@
+diff --git a/jdk/src/share/bin/splashscreen_stubs.c b/jdk/src/share/bin/splashscreen_stubs.c
+index 9c1f5148c4..666634f6d2 100644
+--- a/jdk/src/share/bin/splashscreen_stubs.c
++++ b/jdk/src/share/bin/splashscreen_stubs.c
+@@ -61,11 +61,11 @@ typedef char* (*SplashGetScaledImageName_t)(const char* fileName,
  #define INVOKEV(name) _INVOKE(name, ,;)
  
  int     DoSplashLoadMemory(void* pdata, int size) {

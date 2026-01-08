@@ -1,6 +1,7 @@
-diff -ru openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp openjdk/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp
---- openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp	2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp	2017-02-06 11:23:47.041165210 +0000
+diff --git a/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp b/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp
+index f58c94956c..cd681b2105 100644
+--- a/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp
++++ b/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp
 @@ -46,6 +46,8 @@
  
  #include "zip.h"
@@ -10,9 +11,10 @@ diff -ru openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.cpp op
  #ifdef NO_ZLIB
  
  inline bool jar::deflate_bytes(bytes& head, bytes& tail) {
-diff -ru openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h openjdk/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h
---- openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h	2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h	2017-02-06 11:23:47.047832009 +0000
+diff --git a/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h b/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h
+index 14ffc9d65b..70eb43f4cc 100644
+--- a/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h
++++ b/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h
 @@ -23,9 +23,7 @@
   * questions.
   */
@@ -24,9 +26,10 @@ diff -ru openjdk.orig/jdk/src/share/native/com/sun/java/util/jar/pack/zip.h open
  
  struct unpacker;
  
-diff -ru openjdk.orig/jdk/src/share/native/sun/awt/medialib/mlib_types.h openjdk/jdk/src/share/native/sun/awt/medialib/mlib_types.h
---- openjdk.orig/jdk/src/share/native/sun/awt/medialib/mlib_types.h	2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/share/native/sun/awt/medialib/mlib_types.h	2017-02-06 11:23:47.047832009 +0000
+diff --git a/jdk/src/share/native/sun/awt/medialib/mlib_types.h b/jdk/src/share/native/sun/awt/medialib/mlib_types.h
+index aba0394ffd..703442b78d 100644
+--- a/jdk/src/share/native/sun/awt/medialib/mlib_types.h
++++ b/jdk/src/share/native/sun/awt/medialib/mlib_types.h
 @@ -27,6 +27,7 @@
  #ifndef MLIB_TYPES_H
  #define MLIB_TYPES_H
@@ -35,9 +38,10 @@ diff -ru openjdk.orig/jdk/src/share/native/sun/awt/medialib/mlib_types.h openjdk
  #include <limits.h>
  #if defined(_MSC_VER)
  #include <float.h>                      /* for FLT_MAX and DBL_MAX */
-diff -ru openjdk.orig/jdk/src/solaris/native/java/net/Inet4AddressImpl.c openjdk/jdk/src/solaris/native/java/net/Inet4AddressImpl.c
---- openjdk.orig/jdk/src/solaris/native/java/net/Inet4AddressImpl.c	2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/solaris/native/java/net/Inet4AddressImpl.c	2017-02-06 11:23:47.047832009 +0000
+diff --git a/jdk/src/solaris/native/java/net/Inet4AddressImpl.c b/jdk/src/solaris/native/java/net/Inet4AddressImpl.c
+index 8b2e3cdce9..6a4a513c0d 100644
+--- a/jdk/src/solaris/native/java/net/Inet4AddressImpl.c
++++ b/jdk/src/solaris/native/java/net/Inet4AddressImpl.c
 @@ -47,7 +47,7 @@
  
  #include "java_net_Inet4AddressImpl.h"
@@ -47,10 +51,11 @@ diff -ru openjdk.orig/jdk/src/solaris/native/java/net/Inet4AddressImpl.c openjdk
  #define HAS_GLIBC_GETHOSTBY_R   1
  #endif
  
-diff -ru openjdk.orig/jdk/src/solaris/native/java/net/linux_close.c openjdk/jdk/src/solaris/native/java/net/linux_close.c
---- openjdk.orig/jdk/src/solaris/native/java/net/linux_close.c	2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/solaris/native/java/net/linux_close.c	2017-02-06 11:23:47.047832009 +0000
-@@ -56,7 +56,7 @@
+diff --git a/jdk/src/solaris/native/java/net/linux_close.c b/jdk/src/solaris/native/java/net/linux_close.c
+index 763c13ffc1..ce4434f5ba 100644
+--- a/jdk/src/solaris/native/java/net/linux_close.c
++++ b/jdk/src/solaris/native/java/net/linux_close.c
+@@ -59,7 +59,7 @@ typedef struct {
  /*
   * Signal to unblock thread
   */
@@ -59,7 +64,7 @@ diff -ru openjdk.orig/jdk/src/solaris/native/java/net/linux_close.c openjdk/jdk/
  
  /*
   * fdTable holds one entry per file descriptor, up to a certain
-@@ -95,6 +95,9 @@
+@@ -148,6 +148,9 @@ static void __attribute((constructor)) init() {
      /*
       * Setup the signal handler
       */
@@ -69,12 +74,13 @@ diff -ru openjdk.orig/jdk/src/solaris/native/java/net/linux_close.c openjdk/jdk/
      sa.sa_handler = sig_wakeup;
      sa.sa_flags   = 0;
      sigemptyset(&sa.sa_mask);
-diff -ru openjdk.orig/jdk/src/solaris/native/sun/nio/ch/NativeThread.c openjdk/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
---- openjdk.orig/jdk/src/solaris/native/sun/nio/ch/NativeThread.c      2017-01-25 04:22:03.000000000 +0000
-+++ openjdk/jdk/src/solaris/native/sun/nio/ch/NativeThread.c   2017-02-06 11:23:47.051165409 +0000
+diff --git a/jdk/src/solaris/native/sun/nio/ch/NativeThread.c b/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
+index 204f0441a9..f5483bbdbd 100644
+--- a/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
++++ b/jdk/src/solaris/native/sun/nio/ch/NativeThread.c
 @@ -36,7 +36,7 @@
    #include <pthread.h>
-   #include <sys/signal.h>
+   #include <signal.h>
    /* Also defined in net/linux_close.c */
 -  #define INTERRUPT_SIGNAL (__SIGRTMAX - 2)
 +  #define INTERRUPT_SIGNAL (SIGRTMAX - 2)

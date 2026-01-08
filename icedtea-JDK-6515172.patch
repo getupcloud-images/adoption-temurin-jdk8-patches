@@ -20,7 +20,7 @@ diff --git a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_l
 index 10665b9b2..8e6f99bf3 100644
 --- openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp
-@@ -5329,41 +5329,56 @@ void os::make_polling_page_readable(void) {
+@@ -5284,41 +5284,56 @@ void os::make_polling_page_readable(void) {
    }
  };
  

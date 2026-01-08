@@ -1,9 +1,8 @@
-musl needs LD_LIBRARY_PATH set because when .so is opened with dlopen(/abs/path)
-it does not qualify for providing symbols for NEEDED dependency.
-
---- openjdk.orig/jdk/src/solaris/bin/java_md_solinux.c
-+++ openjdk/jdk/src/solaris/bin/java_md_solinux.c
-@@ -291,6 +291,8 @@
+diff --git a/jdk/src/solaris/bin/java_md_solinux.c b/jdk/src/solaris/bin/java_md_solinux.c
+index a96713757d..b36962c27c 100644
+--- a/jdk/src/solaris/bin/java_md_solinux.c
++++ b/jdk/src/solaris/bin/java_md_solinux.c
+@@ -292,6 +292,8 @@ RequiresSetenv(int wanted, const char *jvmpath) {
      char *dmllp = NULL;
      char *p; /* a utility pointer */
  
